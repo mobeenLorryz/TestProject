@@ -1,0 +1,24 @@
+<%= debug comments %>
+<% @comments.each do |comment| %>
+    <div class="social-comment">
+          <a href="" class="pull-left">
+              <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar6.png">
+          </a>
+          <div class="media-body">
+            <a href="#">
+              Mobeen Khalid
+            </a>
+            <%= comment.comment %>
+          <br>  
+          </div>
+    </div>
+  <% end %>  
+  <div class="social-comment">
+              <a href="" class="pull-left">
+                  <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar3.png">
+              </a>
+              <div class="media-body">
+                  <textarea class="form-control" placeholder="Write comment..."></textarea>
+              </div>
+          </div>
+  </div>

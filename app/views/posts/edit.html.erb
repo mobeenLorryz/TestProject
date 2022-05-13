@@ -1,0 +1,16 @@
+
+<div class='container'>
+<h1>Editing Post</h1>
+<%= form_for @post, url: "/posts/"+@post.id.to_s+'/update', method: :post do |f| %>
+    <div class='form-group'>
+        <%= f.label :body %>
+        <%= f.text_area :body, :value => f.object.body, class: 'form-control' %>
+    </div>
+    <div class='float-right' > 
+    <%= link_to 'Back', posts_path, class: 'btn btn-secondary' %>
+    <%= f.submit 'Update', class: 'btn btn-primary' %>
+    </div>
+<% end %>
+
+</div>
+

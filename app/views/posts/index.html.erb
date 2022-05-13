@@ -1,0 +1,105 @@
+<div class='container'>
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Posts</h1>
+    </div>
+    <% if user_signed_in? %>
+      <div class="col-md-6 float-right">
+        <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+  
+  <!--<div class='row'>-->
+    <div class="col-md-12">
+  <% @posts.each do |post| %>
+    <div class="social-feed-separated">
+    <div class="social-avatar">
+        <a href="">
+            <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar2.png">
+        </a>
+    </div>
+    <div class="social-feed-box">
+        <!--<div class="float-right dropdown show">
+            <button data-toggle="dropdown" class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink<%= post.id %>" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu m-t-xs" aria-labelledby="dropdownMenuLink<%= post.id %>">
+                <li><a href="#">Edit</a></li>
+                <li><a href="#">Delete</a></li>
+            </ul>
+        </div>-->
+
+        <% if user_signed_in? && current_user.id == post.user.id %>
+          <div class="dropdown float-right">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton<%= post.id %>" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<%= post.id %>">
+              <li><a href="<%= edit_post_path(post.id) %>">Edit</a></li>
+              <li><%= link_to 'Delete', post_path(post), method: :delete, data: { confirm: 'Are you certain you want to delete this?' } %></li>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="social-avatar">
+            <a href="#">
+                <%= post.user.uniqueslug %>
+            </a>
+            <small class="text-muted"><%= time_ago_in_words(post.created_at) %> ago.</small>
+        </div>
+        <div class="social-body">
+            <p>
+              <%= post.body %>
+            </p>
+            <!--<div class="btn-group">
+                <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
+                <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
+            </div>-->
+        </div>
+        <div class="social-footer">
+        <% post.comments.each do |comment| %>
+          <div class="social-comment">
+                <a href="" class="pull-left">
+                    <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                </a>
+                <div class="media-body">
+                  <a href="#">
+                    <%= comment.user.uniqueslug %>
+                  </a>
+                  <%= comment.comment %>
+                <br>  
+                </div>
+          </div>
+        <% end %>
+        
+        <% if user_signed_in? %>
+        <div class="social-comment">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar3.png">
+                    </a>
+                    <div class="media-body">
+                    <%= form_for @comment, url: '/posts/'+post.id.to_s+'/comments' do |f| %>
+                      <%= f.hidden_field :post_id, value: post.id %>
+                      <div class='form-group'>
+                          <%= f.text_area :comment, class: 'form-control', placeholder: 'Write comment' %>
+                      </div>
+                      <div class='float-right' >
+                          <%= f.submit 'Comment', class: 'btn btn-primary' %>
+                      </div>
+                  <% end %>
+                    </div>
+                </div>
+        </div>
+        <% end %>
+          
+        </div>
+    </div>
+
+
+
+    <% end %>
+	</div>
+  <!--</div>-->
+  </div>

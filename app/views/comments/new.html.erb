@@ -1,0 +1,14 @@
+<div class='container'>
+    <h1>New Comment</h1>
+    <%= form_for @comment, url: '/posts/'+@post.id.to_s+'/comments' do |f| %>
+        <%= f.hidden_field :post_id, value: @post.id %>
+        <div class='form-group'>
+            <%= f.label :comment, "Your Comment" %><br/>
+            <%= f.text_area :comment, class: 'form-control' %>
+        </div>
+        <div class='float-right' >
+            <%= link_to 'Back', posts_path, class: 'btn btn-secondary' %>
+            <%= f.submit 'Comment', class: 'btn btn-primary' %>
+        </div>
+    <% end %>
+</div>
