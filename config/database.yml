@@ -84,5 +84,6 @@ test:
 production:
   <<: *default
   database: devise-tutorial_production
-  username: devise-tutorial
-  password: <%= ENV['DEVISE-TUTORIAL_DATABASE_PASSWORD'] %>
+  username: postgres
+  password: 8DqtNmvyXzRlrpkwyrEC
+  host: database-2.c4ovslbw9i3u.us-west-2.rds.amazonaws.com
